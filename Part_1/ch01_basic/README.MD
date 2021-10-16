@@ -26,11 +26,11 @@
 ## 1.3 字符串连接和复制
 
 ```python
-'Alice' + 'Bob'  // Alice Bob  
-'Alice' * 5      // AliceAliceAliceAliceAlice  
-'Alice' + 1      // TypeError: Can't covert 'int' object to str implicity  
-'Alice' * 'Bob'  // TypeError: Can't multiply sequence by non-int of type 'str'  
-'Alice' * 5.0    // TypeError: Can't multiply sequence by non-int of type 'float'  
+'Alice' + 'Bob'  # Alice Bob  
+'Alice' * 5      # AliceAliceAliceAliceAlice  
+'Alice' + 1      # TypeError: Can't covert 'int' object to str implicity  
+'Alice' * 'Bob'  # TypeError: Can't multiply sequence by non-int of type 'str'  
+'Alice' * 5.0    # TypeError: Can't multiply sequence by non-int of type 'float'  
 ```
 
 ## 1.4 在变量中保存值
@@ -46,9 +46,9 @@ spam + eggs              // 42
 spam = spam + eggs  
 spam                     // 42  
 spam = 'Hi'  
-spam                     // Hi  
+spam                     // 'Hi'  
 spam = 'Bye'  
-spam                     // Bye  
+spam                     // 'Bye'  
 ```
 
 ### 1.4.2 变量名
@@ -125,25 +125,25 @@ int()将传入的参数转换为整数
 float()将传入的参数转换为浮点数  
 
 ```python
-str(0)               // '0'  
-str(-3.14)           // '-3.14'  
-int('42')            // 42  
-int('-99')           // -99  
-int(1.25)            // 1  
-int(1.99)            // 1  
-float('3.14')        // 3.14  
-float(10)            // 10.0  
+str(0)               # '0'  
+str(-3.14)           # '-3.14'  
+int('42')            # 42  
+int('-99')           # -99  
+int(1.25)            # 1  
+int(1.99)            # 1  
+float('3.14')        # 3.14  
+float(10)            # 10.0  
 spam=input()  
-spam                 // '101'  
+spam                 # '101'  
 spam=int(spam)  
-spam                 // 101  
-spam * 10 / 5        // 202.0  
-int(99.99)           // ValueError: invalid literal for int() with base 10: '99.99'  
-int('twelve')        // ValueError: invalid literal for int() with base 10: 'twelve'  
+spam                 # 101  
+spam * 10 / 5        # 202.0  
+int(99.99)           # ValueError: invalid literal for int() with base 10: '99.99'  
+int('twelve')        # ValueError: invalid literal for int() with base 10: 'twelve'  
 
-42 == '42'           // False  
-42 == 42.0           // True  
-42.0 == 0042.000     // True  
+42 == '42'           # False  
+42 == 42.0           # True  
+42.0 == 0042.000     # True  
 ```
 
 ## 1.7 小结
@@ -151,3 +151,5 @@ int('twelve')        // ValueError: invalid literal for int() with base 10: 'twe
 操作符，数据类型，常用函数  
 
 ## 1.8 习题
+
+round()函数的帮助文档，并实践  
