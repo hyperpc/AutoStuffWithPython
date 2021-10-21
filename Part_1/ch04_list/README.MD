@@ -541,7 +541,7 @@ TypeError: 'tuple' object does not support item assignment
 
 ## 4.8 小结
 
-可变数据类型(列表，字典)和不可斌数据类型(元组，字符串)，切片，append()，remove()，覆写，引用，copy()和deepcopy()  
+可变数据类型(列表，字典)和不可斌数据类型(元组，字符串)，切片，append()，remove()，覆写，引用，<span style='color:red'>copy()和deepcopy()</span>  
 
 ## 4.9 习题
 
