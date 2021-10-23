@@ -1,6 +1,6 @@
 # Python编程快速上手
 
-## --让繁琐工作自动化  
+## ---让繁琐工作自动化  
 
 ### Automate the boring stuff with python  
 
@@ -10,7 +10,7 @@
 
 本书使用的版本是[Python 3](https://www.python.org/downloads/)  
 
-适用于Windows和OS X的版本可以手动双击安装。  
+适用于Windows和OS X的版本可以手动双击下载的安装包，开始安装。  
 下面举例Ubuntu的命令行安装：  
 
 > sudo apt-get install python3  
@@ -25,8 +25,8 @@
 [learnprogramming subreddit](http://reddit.com/r/learnprogramming/)  
 
 作者：Al Sweigart  
-网站：http://www.inventwithpython.com/  
-博客：http://www.inventwithpython.com/blog/  
+网站：[http://www.inventwithpython.com/](http://www.inventwithpython.com/)  
+博客：[http://www.inventwithpython.com/blog/](http://www.inventwithpython.com/blog/)  
 邮件：al@inventwithpython.com  
 
 ## 配置Visual Studio Code
