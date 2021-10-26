@@ -1,0 +1,30 @@
+import re,sys,os
+
+currentPath = os.path.dirname(sys.argv[0])
+articleFile = open(os.path.join(currentPath, 'article.txt'))
+content = articleFile.read()
+articleFile.close()
+print(content)
+
+print('Enter an adjective:')
+adj = input()
+adjRegex = re.compile('ADJECTIVE')
+content = adjRegex.sub(adj, content)
+
+print('Enter an noun:')
+noun = input()
+nounRegex = re.compile('NOUN')
+content = nounRegex.sub(noun, content)
+print('Enter an verb:')
+verb = input()
+verbRegex = re.compile('VERB')
+content = verbRegex.sub(verb, content)
+print('Enter an adverb:')
+adverb = input()
+adverbRegex = re.compile('ADVERB')
+content = adverbRegex.sub(adverb, content)
+
+print(content)
+newArticleFile = open(os.path.join(currentPath, 'newArticle.txt'), 'w')
+newArticleFile.write(content)
+newArticleFile.close()

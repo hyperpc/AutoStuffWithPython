@@ -1,0 +1,176 @@
+What's new in C# 9.0
+
+Record types
+C# 9.0 introduces record types. You use the record keyword to define a reference type that provides built-in functionality for encapsulating data. You can create record types with immutable properties by using positional parameters or standard property syntax:
+
+public record Person(string FirstName, string LastName);
+
+public record Person
+{
+    public string FirstName { get; init; } = default!;
+    public string LastName { get; init; } = default!;
+};
+
+You can also create record types with mutable properties and fields:
+
+public record Person
+{
+    public string FirstName { get; set; } = default!;
+    public string LastName { get; set; } = default!;
+};
+
+While records can be mutable, they are primarily intended for supporting immutable data models. The record type offers the following features:
+
+Concise syntax for creating a reference type with immutable properties
+Behavior useful for a data-centric reference type:
+Value equality
+Concise syntax for nondestructive mutation
+Built-in formatting for display
+Support for inheritance hierarchies
+You can use structure types to design data-centric types that provide value equality and little or no behavior. But for relatively large data models, structure types have some disadvantages:
+
+They don't support inheritance.
+They're less efficient at determining value equality. For value types, the ValueType.Equals method uses reflection to find all fields. For records, the compiler generates the Equals method. In practice, the implementation of value equality in records is measurably faster.
+They use more memory in some scenarios, since every instance has a complete copy of all of the data. Record types are reference types, so a record instance contains only a reference to the data.
+
+Positional syntax for property definition
+
+You can use positional parameters to declare properties of a record and to initialize the property values when you create an instance:
+
+public record Person(string FirstName, string LastName);
+
+public static void Main()
+{
+    Person person = new("Nancy", "Davolio");
+    Console.WriteLine(person);
+    // output: Person { FirstName = Nancy, LastName = Davolio }
+}
+
+When you use the positional syntax for property definition, the compiler creates:
+
+A public init-only auto-implemented property for each positional parameter provided in the record declaration. An init-only property can only be set in the constructor or by using a property initializer.
+A primary constructor whose parameters match the positional parameters on the record declaration.
+A Deconstruct method with an out parameter for each positional parameter provided in the record declaration.
+For more information, see Positional syntax in the C# language reference article about records.
+
+Immutability
+A record type is not necessarily immutable. You can declare properties with set accessors and fields that aren't readonly. But while records can be mutable, they make it easier to create immutable data models. Properties that you create by using positional syntax are immutable.
+
+Immutability can be useful when you want a data-centric type to be thread-safe or a hash code to remain the same in a hash table. It can prevent bugs that happen when you pass an argument by reference to a method, and the method unexpectedly changes the argument value.
+
+The features unique to record types are implemented by compiler-synthesized methods, and none of these methods compromises immutability by modifying object state.
+
+Value equality
+Value equality means that two variables of a record type are equal if the types match and all property and field values match. For other reference types, equality means identity. That is, two variables of a reference type are equal if they refer to the same object.
+
+The following example illustrates value equality of record types:
+
+public record Person(string FirstName, string LastName, string[] PhoneNumbers);
+
+public static void Main()
+{
+    var phoneNumbers = new string[2];
+    Person person1 = new("Nancy", "Davolio", phoneNumbers);
+    Person person2 = new("Nancy", "Davolio", phoneNumbers);
+    Console.WriteLine(person1 == person2); // output: True
+
+    person1.PhoneNumbers[0] = "555-1234";
+    Console.WriteLine(person1 == person2); // output: True
+
+    Console.WriteLine(ReferenceEquals(person1, person2)); // output: False
+}
+
+In class types, you could manually override equality methods and operators to achieve value equality, but developing and testing that code would be time-consuming and error-prone. Having this functionality built-in prevents bugs that would result from forgetting to update custom override code when properties or fields are added or changed.
+
+For more information, see Value equality in the C# language reference article about records.
+
+Nondestructive mutation
+If you need to mutate immutable properties of a record instance, you can use a with expression to achieve nondestructive mutation. A with expression makes a new record instance that is a copy of an existing record instance, with specified properties and fields modified. You use object initializer syntax to specify the values to be changed, as shown in the following example:
+
+public record Person(string FirstName, string LastName)
+{
+    public string[] PhoneNumbers { get; init; }
+}
+
+public static void Main()
+{
+    Person person1 = new("Nancy", "Davolio") { PhoneNumbers = new string[1] };
+    Console.WriteLine(person1);
+    // output: Person { FirstName = Nancy, LastName = Davolio, PhoneNumbers = System.String[] }
+
+    Person person2 = person1 with { FirstName = "John" };
+    Console.WriteLine(person2);
+    // output: Person { FirstName = John, LastName = Davolio, PhoneNumbers = System.String[] }
+    Console.WriteLine(person1 == person2); // output: False
+
+    person2 = person1 with { PhoneNumbers = new string[1] };
+    Console.WriteLine(person2);
+    // output: Person { FirstName = Nancy, LastName = Davolio, PhoneNumbers = System.String[] }
+    Console.WriteLine(person1 == person2); // output: False
+
+    person2 = person1 with { };
+    Console.WriteLine(person1 == person2); // output: True
+}
+For more information, see Nondestructive mutation in the C# language reference article about records.
+
+Built-in formatting for display
+Record types have a compiler-generated ToString method that displays the names and values of public properties and fields. The ToString method returns a string of the following format:
+
+<record type name> { <property name> = <value>, <property name> = <value>, ...}
+
+For reference types, the type name of the object that the property refers to is displayed instead of the property value. In the following example, the array is a reference type, so System.String[] is displayed instead of the actual array element values:
+
+Person { FirstName = Nancy, LastName = Davolio, ChildNames = System.String[] }
+
+For more information, see Built-in formatting in the C# language reference article about records.
+
+Inheritance
+A record can inherit from another record. However, a record can't inherit from a class, and a class can't inherit from a record.
+
+The following example illustrates inheritance with positional property syntax:
+
+public abstract record Person(string FirstName, string LastName);
+public record Teacher(string FirstName, string LastName, int Grade)
+    : Person(FirstName, LastName);
+public static void Main()
+{
+    Person teacher = new Teacher("Nancy", "Davolio", 3);
+    Console.WriteLine(teacher);
+    // output: Teacher { FirstName = Nancy, LastName = Davolio, Grade = 3 }
+}
+
+For two record variables to be equal, the run-time type must be equal. The types of the containing variables might be different. This is illustrated in the following code example:
+
+public abstract record Person(string FirstName, string LastName);
+public record Teacher(string FirstName, string LastName, int Grade)
+    : Person(FirstName, LastName);
+public record Student(string FirstName, string LastName, int Grade)
+    : Person(FirstName, LastName);
+public static void Main()
+{
+    Person teacher = new Teacher("Nancy", "Davolio", 3);
+    Person student = new Student("Nancy", "Davolio", 3);
+    Console.WriteLine(teacher == student); // output: False
+
+    Student student2 = new Student("Nancy", "Davolio", 3);
+    Console.WriteLine(student2 == student); // output: True
+}
+
+In the example, all instances have the same properties and the same property values. But student == teacher returns False although both are Person-type variables. And student == student2 returns True although one is a Person variable and one is a Student variable.
+
+All public properties and fields of both derived and base types are included in the ToString output, as shown in the following example:
+
+public abstract record Person(string FirstName, string LastName);
+public record Teacher(string FirstName, string LastName, int Grade)
+    : Person(FirstName, LastName);
+public record Student(string FirstName, string LastName, int Grade)
+    : Person(FirstName, LastName);
+
+public static void Main()
+{
+    Person teacher = new Teacher("Nancy", "Davolio", 3);
+    Console.WriteLine(teacher);
+    // output: Teacher { FirstName = Nancy, LastName = Davolio, Grade = 3 }
+}
+
+For more information, see Inheritance in the C# language reference article about records.

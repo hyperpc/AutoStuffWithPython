@@ -1,0 +1,2 @@
+This is a file that Python created!!!
+Bacon is not a vegetable.

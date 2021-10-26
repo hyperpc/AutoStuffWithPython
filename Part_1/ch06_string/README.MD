@@ -376,7 +376,7 @@ pyperclip模块是第三方模块，需要另外安装
 参考示例脚本#6_3_pw.py  
 在Windows上创建一个批处理文件pw.bat：  
 
-```
+```batch
 @py.exe D:\pyAuto\6_3_pw.py %*
 @pause
 ```

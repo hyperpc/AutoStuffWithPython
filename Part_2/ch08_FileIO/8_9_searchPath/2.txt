@@ -1,0 +1,36 @@
+What's new in C# 9.0
+
+Init only setters
+
+Init only setters provide consistent syntax to initialize members of an object. Property initializers make it clear which value is setting which property. The downside is that those properties must be settable. Starting with C# 9.0, you can create init accessors instead of set accessors for properties and indexers. Callers can use property initializer syntax to set these values in creation expressions, but those properties are readonly once construction has completed. Init only setters provide a window to change state. That window closes when the construction phase ends. The construction phase effectively ends after all initialization, including property initializers and with-expressions have completed.
+
+You can declare init only setters in any type you write. For example, the following struct defines a weather observation structure:
+
+public struct WeatherObservation
+{
+    public DateTime RecordedAt { get; init; }
+    public decimal TemperatureInCelsius { get; init; }
+    public decimal PressureInMillibars { get; init; }
+
+    public override string ToString() =>
+        $"At {RecordedAt:h:mm tt} on {RecordedAt:M/d/yyyy}: " +
+        $"Temp = {TemperatureInCelsius}, with {PressureInMillibars} pressure";
+}
+
+Callers can use property initializer syntax to set the values, while still preserving the immutability:
+
+var now = new WeatherObservation 
+{ 
+    RecordedAt = DateTime.Now, 
+    TemperatureInCelsius = 20, 
+    PressureInMillibars = 998.0m 
+};
+
+An attempt to change an observation after initialization results in a compiler error:
+
+// Error! CS8852.
+now.TemperatureInCelsius = 18;
+
+Init only setters can be useful to set base class properties from derived classes. They can also set derived properties through helpers in a base class. Positional records declare properties using init only setters. Those setters are used in with-expressions. You can declare init only setters for any class, struct, or record you define.
+
+For more information, see init (C# Reference).
