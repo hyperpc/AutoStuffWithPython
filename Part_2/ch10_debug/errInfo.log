@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "d:\Workspace\AutoStuffWithPython\Part_2\ch10_debug\10_2_errLog.py", line 4, in <module>
+    raise Exception('This is the error message.')
+Exception: This is the error message.
