@@ -115,14 +115,13 @@ logging模块使得显示和隐藏日志信息之间的切换变容易
 
 >>> print(factorial(5))
  2021-10-30 22:28:26,824 - DEBUG - Start of factorial(5%)
- 2021-10-30 22:28:26,880 - DEBUG - i is 0, total is 0
- 2021-10-30 22:28:26,895 - DEBUG - i is 1, total is 0
- 2021-10-30 22:28:26,911 - DEBUG - i is 2, total is 0
- 2021-10-30 22:28:26,929 - DEBUG - i is 3, total is 0
- 2021-10-30 22:28:26,946 - DEBUG - i is 4, total is 0
- 2021-10-30 22:28:26,962 - DEBUG - i is 5, total is 0
+ 2021-10-30 22:28:26,895 - DEBUG - i is 1, total is 1
+ 2021-10-30 22:28:26,911 - DEBUG - i is 2, total is 2
+ 2021-10-30 22:28:26,929 - DEBUG - i is 3, total is 6
+ 2021-10-30 22:28:26,946 - DEBUG - i is 4, total is 24
+ 2021-10-30 22:28:26,962 - DEBUG - i is 5, total is 120
  2021-10-30 22:28:26,977 - DEBUG - End of factorial(5%)
-0
+120
 >>> logging.debug('End of program')
  2021-10-30 22:29:01,427 - DEBUG - End of program
 ```

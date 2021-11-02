@@ -37,3 +37,8 @@
 在VS Code的终端面板，切换到命令提示符模式，  
 输入命令‘Python --version’，如果能正确输出上面安装的Python版本，则成功；  
 否则，请重启VS Code，然后再输入以上命令，看是否成功。  
+
+## 安装Anaconda环境
+
+[Anaconda 3](https://repo.anaconda.com/archive/)，找到符合当前开发环境得软件版本，下载成功后，双击安装即可  
+现在得最新版本是[Anaconda3-2021.05-Windows-x86_64.exe](https://repo.anaconda.com/archive/Anaconda3-2021.05-Windows-x86_64.exe)  
