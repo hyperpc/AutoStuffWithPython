@@ -537,7 +537,7 @@ TypeError: 'tuple' object does not support item assignment
 ['A', 'B', 'C', ['abc', ['d', 1, 'ef']], 'D', 'E']
 ```
 
-在当前版本中，没有发现copy()和deepcopy()函数的使用区别  
+更多示例参考脚本#4_7_deepcopy.py   
 
 ## 4.8 小结
 
