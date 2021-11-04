@@ -243,5 +243,115 @@ Tag对象的get()方法，可以从元素中获取属性值
 > pip install selenium  
 
 selenium模块会启动Web浏览器，模拟人类的一些交互行为，比Requests和BeautifulSoup模块更高级，但速度会更慢，难以在后台运行  
+惨开示例脚本#11_8_selenium.py  
+注意，如果未打开，或打开后无法跳转指定网址，请先下载跟Edge版本对应的[Microsoft Edge Driver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)  
 
 ### 11.8.1 启动selenium控制的浏览器
+
+导入selenium模块有些特殊，使用如下方式：  
+
+> from selenium import webdriver  
+
+### 11.8.2 在页面中寻找元素
+
+find_element_*方法返回页面中匹配查询的第一个WebElement对象  
+find_elements_*方法返回页面中所有匹配查询的WebElement对象列表  
+
+|方法名|返回的WebElement对象/列表|
+|:---|:---|
+|browser.find_element_by_class_name(name)|返回CSS类name的第一个元素|
+|browser.find_elements_by_class_name(name)|返回CSS类name的元素列表|
+|browser.find_element_by_css_selector(selector)|匹配CSS selector的第一个元素|
+|browser.find_element_by_css_selector(selector)|匹配CSS selector的元素列表|
+|browser.find_element_by_id(id)|匹配id属性值的第一个元素|
+|browser.find_elements_by_id(id)|匹配id属性值的元素列表|
+|browser.find_element_by_link_text(text)|完全匹配提供的text的第一个&lt;a&gt;元素|
+|browser.find_elements_by_link_text(text)|完全匹配提供的text的&lt;a&gt;元素列表|
+|browser.find_element_by_partial_link_text(text)|包含提供的text的第一个&lt;a&gt;元素|
+|browser.find_elements_by_partial_link_text(text)|包含提供的text的&lt;a&gt;元素列表|
+|browser.find_element_by_name(name)|匹配name属性值的第一个元素|
+|browser.find_elements_by_name(name)|匹配name属性值的元素列表|
+|browser.find_element_by_tag_name(name)|匹配标签name的第一个元素(大小写无关，&lt;a&gt;元素匹配'a'和'A')|
+|browser.find_elements_by_tag_name(name)|匹配标签name的元素列表(大小写无关，&lt;a&gt;元素匹配'a'和'A')|
+
+以上表格中，除了*_by_tag_name(name)方法，其余的方法参数都是区分大小写的  
+如果未找到元素，selenium模块会报出NoSuchElement异常  
+
+|属性或方法|描述|
+|:---|:---|
+|tag_name|标签名，例如'a'表示&lt;a&gt;元素|
+|get_attribute(name)|该元素name属性的值|
+|text|该元素内的文本，例如&lt;span&gt;hello&lt;/a&gt;中的'hello'|
+|clear()|对于文本字段或文本区域元素，清除其中输入的文本|
+|is_displayed()|如果该元素可见，返回True，否则返回False|
+|is_enabled()|对于输入元素，如果该元素启用，返回True，否则返回False|
+|is_selected()|对于复选框或单选框元素，如果该元素被选中，返回True，否则返回False|
+|location|一个字典，包含键'x'和'y'，表示该元素在页面上的位置|
+
+### 11.8.3 点击页面
+
+调用find_element_\*和find_elements_\*返回WebElement对象的click()方法，模拟鼠标点击该元素的效果  
+
+### 11.8.4 填写并提交表单
+
+找到页面文本字段所属的&lt;input&gt;或&lt;textarea&gt;，然后调用send_keys()方法  
+在表单内的任何元素上调用submit()方法，等同于表单的Submit按钮  
+
+### 11.8.5 发送特殊按钮
+
+selenium有一个模块，针对不能用字符串值输入的键盘左键击键  
+selenium.webdriver.common.keys  
+如果向如下方式导入，可以直接通过Keys调用：  
+
+> from selenium.webdriver.common.keys import Keys  
+
+|属性|含义|
+|:---|:---|
+|Keys.DOWN，Keys.UP，Keys.LEFT，Keys.RIGHT|键盘箭头键|
+|Keys.ENTER，Keys.RETURN|回车和换行键|
+|Keys.HOME，Keys.END，Keys.PAGE_UP，Keys.PAGE_DOWN|Home键，End键，PageUp键，PageDown键|
+|Keys.ESCAPE，Keys.BACK_SPACE，Keys.DELETE|Esc，Backspace和删除键|
+|Keys.F1，Keys.F2，...，Keys.F12|键盘顶部的F1到F12键|
+|Keys.TAB|Tab键|
+
+调用find_element_by_tag_name('html')是向一般Web页面发送按键的好地方。当滚到页面底部，新内容就会加载  
+
+### 11.8.6 点击浏览器按钮
+
+selenium可以模拟点击各种浏览器按钮：  
+
+- browser.back() 点击返回按钮  
+- browser.forward() 点击前进按钮  
+- browser.refresh() 点击刷新按钮  
+- browser.quit() 点击关闭窗口按钮  
+
+### 11.8.7 关于selenium的更多信息
+
+可以修改浏览器的cookie，截取页面快照，运行定制的JavaScript  
+[更多](https://selenium-python.readthedocs.io/)  
+
+## 11.9 小结
+
+webbrowser打开浏览器，可指定特定网址  
+requests下载文件和网页，BeatifulSoup解析网页，selenium可以自动化操作网页  
+
+## 11.10 习题
+
+## 11.11 实践项目
+
+### 11.11.1 命令行邮件程序
+
+利用selenium登录到某个邮件账号，参考示例脚本#11_11_emailLogon.py  
+<b style="color:red;">本实例演示未通过</b>
+
+### 11.11.2 图像网站下载
+
+通过程序脚本，访问任何一个有查找功能的图片网站，搜索某一类型的图片，并下载前10个搜索到的图片  
+
+### 11.11.3 2048
+
+通过程序脚本，访问https://gabrielecirulli.github.io/2048/，不断发送上、右、下、左按键，自动玩游戏，得高分  
+
+### 11.11.4 链接验证
+
+通过程序脚本，下载某特定页面的所有链接页面，找到并下载所有具有404"Not Found"状态码的坏链页面  
