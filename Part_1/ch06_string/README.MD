@@ -382,7 +382,7 @@ pyperclip模块是第三方模块，需要另外安装
 ```
 
 将文件6_3_pw.py和pw.bat放入目录D:\pyAuto下  
-然后添加该目录到PATH环境变量中  
+或添加该目录到PATH环境变量中  
 之后，按快捷键Win+R，输入pw &lt;account_name&gt;，如pw email  
 
 ## 6.4 项目：在Wiki标记中添加无序列表

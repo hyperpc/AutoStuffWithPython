@@ -293,8 +293,8 @@ shelf值有keys()和values()方法，返回的值类似列表的值，但不是�
 
 参考示例脚本#8_6_mcb.pyw  
 仿照第6章的批处理配置，  
-将文件6_3_pw.py和pw.bat放入目录D:\pyAuto下  
-输入py mcb.pyw &lt;argv[1]&gt; &lt;argv[2]&gt;：  
+已经配置好PATH环境变量，“运行”框输入py mcb.pyw &lt;argv[1]&gt; &lt;argv[2]&gt;：
+或将文件6_3_pw.py和pw.bat放入目录D:\pyAuto下，直接执行批处理文件  
 
 > py mcb.pyw save spam # 剪贴板中当前内容用关键字spam保存  
 > py mcb.pyw spam      # 将关键字spam对应文本重新加载到剪贴板中  

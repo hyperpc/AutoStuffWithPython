@@ -350,7 +350,7 @@ requests下载文件和网页，BeatifulSoup解析网页，selenium可以自动�
 
 ### 11.11.3 2048
 
-通过程序脚本，访问https://gabrielecirulli.github.io/2048/，不断发送上、右、下、左按键，自动玩游戏，得高分  
+通过程序脚本，访问[2048](https://gabrielecirulli.github.io/2048/)，不断发送上、右、下、左按键，自动玩游戏，得高分  
 
 ### 11.11.4 链接验证
 
