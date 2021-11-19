@@ -127,6 +127,7 @@ JSON字符串总是用双引号，且json模块处理后，会返回一个字典
 ### 第1步：从命令行参数获取位置  
 
 > 14_5_quickWeather my_api_id San Francisco  
+
 运行上述命令后，sys.argv会保存为['14_5_quickWeather', 'my_api_id', 'San', 'Francisco']  
 程序会将appid后面的几个参数连接成一个字符串，作为传入的位置数据  
 

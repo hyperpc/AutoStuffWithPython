@@ -243,7 +243,7 @@ Tag对象的get()方法，可以从元素中获取属性值
 > pip install selenium  
 
 selenium模块会启动Web浏览器，模拟人类的一些交互行为，比Requests和BeautifulSoup模块更高级，但速度会更慢，难以在后台运行  
-惨开示例脚本#11_8_selenium.py  
+参考示例脚本#11_8_selenium.py  
 注意，如果未打开，或打开后无法跳转指定网址，请先下载跟Edge版本对应的[Microsoft Edge Driver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)  
 [谷歌浏览器ChromeDriver下载](http://npm.taobao.org/mirrors/chromedriver/)  
 [火狐浏览器FirefoxDriver下载](https://github.com/mozilla/geckodriver/releases)
